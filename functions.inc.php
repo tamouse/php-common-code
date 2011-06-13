@@ -136,28 +136,35 @@ function build_url($parts)
  *
  * @return void
  * @author Tamara Temple <tamara@tamaratemple.com>
+ *
+ * CHANGED: made function a bit more useful by being the ONLY debug function to call, and to allow $var, $file, and $line to be optional parameters. If $var is an array, it will print out via print_r, otherwise it's just echoed as is. $file and $line are used to supply __FILE__ and __LINE__ parameters specifically. This is possibly prettier than making every debug call look like >> debug(basename(__FILE__).'@'.__LINE__.' '."message"); << as it will now read as: >> debug("message",'',__FILE__,__LINE__); << instead.
+ *
+ *
  **/
-function debug($msg)
+function debug($msg,$var='',$file='',$line='')
 {
 	if (DEBUG) {
-		echo DEBUGPREFIX . "DEBUG: $msg" . DEBUGSUFFIX;
+		echo DEBUGPREFIX.PHP_EOL;
+		if (!empty(basename($file))) echo basename($file);
+		if (!empty($line)) echo '@'.$line;
+		echo "DEBUG: $msg".PHP_EOL;
+		if (!empty($var)) {
+			if (is_array($var)) {
+				echo htmlspecialchars(print_r($var,true));				
+			} else {
+				echo htmlspecialchars($var);
+			}
+		}
+		echo DEBUGSUFFIX.PHP_EOL;
 	}
 }
 
 /**
- * debug var function - dump a variable if DEBUG === TRUE
- *
- * @return void
- * @author Tamara Temple <tamara@tamaratemple.com>
+ * debug var function - DEPRICATED - use debug instead now
  **/
-function debug_var($msg,$var)
+function debug_var($msg,$var='',$file='',$line='')
 {
-	if (DEBUG) {
-		echo DEBUGPREFIX . "DEBUG: $msg" . DEBUGSUFFIX;
-		echo "<pre>\n";
-		print_r($var);
-		echo "</pre>\n";
-	}
+	debug($msg,$var,$file,$line);
 }
 
 /**
