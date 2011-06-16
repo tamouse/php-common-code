@@ -43,10 +43,15 @@ if (!defined('APP_NAME')) 			define('APP_NAME', 			'MyApp');
 if (!defined('APP_ROOT'))				define('APP_ROOT',dirname(__FILE__) . DIRECTORY_SEPARATOR); // Assuming this file is in the root of your application. If it's somewhere below, you should wrap up dirname() with the appropriate number of dirname()'s to get to the root directory.
 if (!defined('APP_URI_BASE'))			define('APP_URI_BASE',		isset($_SERVER['SCRIPT_NAME']) ? dirname($_SERVER['SCRIPT_NAME']).DIRECTORY_SEPARATOR : NULL); // Again, assuming that the script being called is in the root of your application. If it's not, something more complicated like the get_uri_base() function below should be used.
 if (!defined('DEBUG')) 				define('DEBUG', 			'FALSE'); // DEBUG could be defined by testing the GET or POST params for a debug=true entry:
+
+// ======================================================
+// = HOW TO SET UP FOR DEBUGGING IN THE PHP ENVIRONMENT =
+// ======================================================
 /*
-if ((isset($_GET['debug']) && $_GET['debug']=='true') ||
-	(isset($_POST['debug]) && $_POST['debug']=='true')) {
+if ((isset($_REQUEST['debug']) && stringtolower($_REQUEST['debug'])=='true') ||
+	(isset($_SERVER['DEBUG']) && stringtolower($_SERVER['DEBUG']) == 'true')) {
 	define('DEBUG',TRUE);
+	error_reporting(-1);
 	ini_set('display_errors',TRUE);
     ini_set('display_startup_errors',TRUE);
     
