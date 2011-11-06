@@ -1,0 +1,84 @@
+
+==================%<========================== testConstruction start 2011/06/16.20:45:58
+filename: 
+NOT Using finfo
+tbl is: 629 entries.
+
+==================%<========================== testConstruction start 2011/06/16.20:51:31
+filename: 
+
+==================%<========================== testConstruction start 2011/06/16.20:52:09
+filename: 
+NOT Using finfo
+tbl is: 629 entries.
+
+==================%<========================== testConstruction start 2011/06/16.20:54:57
+filename: 
+Class finfo does not exist in this version of PHP
+NOT Using finfo
+tbl is: 629 entries.
+
+==================%<========================== testConstruction start 2011/06/26.22:33:02
+filename: 
+Class finfo does not exist in this version of PHP
+NOT Using finfo
+tbl is: 629 entries.
+filename: ../classMimeToExt.php
+Class finfo does not exist in this version of PHP
+NOT Using finfo
+orgfn=../classMimeToExt.php retfn=../classMimeToExt.php
+
+
+==================%<========================== testConstruction start 2011/06/26.22:33:51
+filename: 
+Class finfo does not exist in this version of PHP
+NOT Using finfo
+tbl is: 629 entries.
+filename: ../classMimeToExt.php
+Class finfo does not exist in this version of PHP
+NOT Using finfo
+orgfn=../classMimeToExt.php retfn=../classMimeToExt.php
+
+
+==================%<========================== testConstruction start 2011/06/26.22:33:51
+filename: 
+Class finfo does not exist in this version of PHP
+NOT Using finfo
+
+==================%<========================== testConstruction start 2011/06/26.22:38:57
+filename: 
+Class finfo does not exist in this version of PHP
+NOT Using finfo
+tbl is: 629 entries.
+filename: ../classMimeToExt.php
+Class finfo does not exist in this version of PHP
+NOT Using finfo
+orgfn=../classMimeToExt.php retfn=../classMimeToExt.php
+
+
+==================%<========================== TestTypeAndExt start 2011/06/26.22:38:57
+filename: 
+Class finfo does not exist in this version of PHP
+NOT Using finfo
+
+==================%<========================== testConstruction start 2011/06/26.22:52:32
+filename: 
+Class finfo does not exist in this version of PHP
+NOT Using finfo
+tbl is: 629 entries.
+filename: ../classMimeToExt.php
+Class finfo does not exist in this version of PHP
+NOT Using finfo
+orgfn=../classMimeToExt.php retfn=../classMimeToExt.php
+
+
+==================%<========================== TestTypeAndExt start 2011/06/26.22:52:32
+filename: 
+Class finfo does not exist in this version of PHP
+NOT Using finfo
+
+==================%<========================== testConstruction start 2011/06/27.02:37:22
+NOT Using finfo
+
+==================%<========================== TestTypeAndExt start 2011/06/27.02:37:23
+NOT Using finfo

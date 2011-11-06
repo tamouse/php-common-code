@@ -1,2 +1,13 @@
+# Ignore the usual suspects
+*~
+*.bak
+*.zip
+*.gz
+*.tar
+*.tgz
+*.bz2
+*.bzip2
 .DS_*
 .backups/
+
+*.phps
