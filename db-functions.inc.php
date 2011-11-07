@@ -5,7 +5,7 @@
  *
  * @author Tamara Temple <tamara@tamaratemple.com>
  * @since 2011/11/06
- * @version <2011-Nov-06 01:08>
+ * @version <2011-Nov-06 12:50>
  * @copyright (c) 2011 Tamara Temple Web Development
  * @license GPLv3
  *
@@ -84,9 +84,8 @@ function get_all_array($db,$tblname,$options=NULL)
 	"Fatal error in query: $sql: (".$db->errno.") ".$db->error);
   $all_rows = Array();
   if ($result->num_rows > 0) {
-      while ($row = $result->fetch_assoc()) {
-	$all_rows[] = $row;
-      }
+    while ($row = $result->fetch_assoc()) {
+      $all_rows[] = $row;
     }
   }
   $result->free();
