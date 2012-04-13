@@ -10,4 +10,12 @@
 .DS_*
 .backups/
 
+# emacs cruft
+*~
+\#*
+.\#*\#
+
+
+# some generated and useless things
 *.phps
+*.log

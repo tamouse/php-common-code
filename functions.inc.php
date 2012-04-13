@@ -3,7 +3,7 @@
  * General reusable functions
  *
  * @author Tamara Temple <tamara@tamaratemple.com>
- * @version <2011-Nov-06 01:28>
+ * @version <2012-Apr-13 15:56>
  * @copyright Tamara Temple Web Development,  2010-
  * @license GPLv3
  * @package common code
@@ -246,3 +246,26 @@ function _list_wrap($s)
 {
   return _wrap($s,'li');
 }
+
+/**
+ * List directories under the given directory path
+ *
+ * @returns array - directories
+ * @author Tamara Temple <tamara@tamaratemple.com>
+ * @param string $d - defaults to current directory
+ **/
+function list_directories ($d='.')
+{
+  if (!isset($d) || empty($d) || !is_dir($d)) return FALSE;
+  $f = scandir($d, 1);
+  if (FALSE === $f) return FALSE;
+  for ($i=0; $i < count($f); ++$i) { 
+    // remove non-directories and . directories
+    if ((is_file($f[$i])) || ($f[$i] == ".") || ($f[$i] == "..")) {
+      array_splice($f, $i, 1);
+      --$i;
+    }
+  }
+  return $f;
+    
+} // END function list_directories
