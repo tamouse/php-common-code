@@ -3,7 +3,7 @@
  * General reusable functions
  *
  * @author Tamara Temple <tamara@tamaratemple.com>
- * @version <2012-Apr-13 22:45>
+ * @version <2012-Apr-13 23:10>
  * @copyright Tamara Temple Web Development,  2010-
  * @license GPLv3
  * @package common code
@@ -263,7 +263,7 @@ function list_directories ($d='.')
   foreach($f as $file) {
     // remove non-directories and . directories
     $filepath = realpath($d.DIRECTORY_SEPARATOR.$file);
-    if ((is_file($filepath)) || ($file == ".") || ($file == "..")) {
+    if ((is_dir($filepath)) && ($file != ".") && ($file != "..")) {
       $dirlist[] = $file;
     }
   }
