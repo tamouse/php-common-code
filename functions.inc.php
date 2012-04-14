@@ -3,7 +3,7 @@
  * General reusable functions
  *
  * @author Tamara Temple <tamara@tamaratemple.com>
- * @version <2012-Apr-13 15:56>
+ * @version <2012-Apr-13 22:45>
  * @copyright Tamara Temple Web Development,  2010-
  * @license GPLv3
  * @package common code
@@ -259,13 +259,39 @@ function list_directories ($d='.')
   if (!isset($d) || empty($d) || !is_dir($d)) return FALSE;
   $f = scandir($d, 1);
   if (FALSE === $f) return FALSE;
-  for ($i=0; $i < count($f); ++$i) { 
+  $dirlist=array();
+  foreach($f as $file) {
     // remove non-directories and . directories
-    if ((is_file($f[$i])) || ($f[$i] == ".") || ($f[$i] == "..")) {
-      array_splice($f, $i, 1);
-      --$i;
+    $filepath = realpath($d.DIRECTORY_SEPARATOR.$file);
+    if ((is_file($filepath)) || ($file == ".") || ($file == "..")) {
+      $dirlist[] = $file;
     }
   }
-  return $f;
+  sort($dirlist);
+  return $dirlist;
     
 } // END function list_directories
+
+
+/**
+ * List non-directory files in the given directory path
+ *
+ * @returns array - non-directory files
+ * @author Tamara Temple <tamara@tamaratemple.com>
+ * @param string $d - defaults to current directory
+ **/
+function list_files ($d='.')
+{
+  if (!isset($d) || empty($d) || !is_dir($d)) return FALSE;
+  $f = scandir($d,1);
+  if (FALSE === $f) return FALSE;
+  $filelist=array();
+  foreach ($f as $file) {
+    $filepath = realpath($d.DIRECTORY_SEPARATOR.$file);
+    if (is_file($filepath)) {
+      $filelist[]=$file;
+    }
+  }
+  sort($filelist);
+  return($filelist);
+} // END function list_files
