@@ -5,7 +5,7 @@
  *
  * @author Tamara Temple <tamara@tamaratemple.com>
  * @since 2011/11/06
- * @version <2011-Nov-07 04:21>
+ * @version <2012-Nov-03 10:42>
  * @copyright (c) 2011 Tamara Temple Web Development
  * @license GPLv3
  *
@@ -119,3 +119,63 @@ function get_one_assoc($db,$tbl,$id,$id_field="id")
   return $row;
 }
 
+/**
+ * Craft an SQL Select statement based on the options passed in
+ *
+ * @returns string - sql statement
+ * @author Tamara Temple <tamara@tamaratemple.com>
+ * @param array $options
+ *
+ * The $options array contains the elements of the SQL Select
+ * statement, in two-dimensional array with the top level keys
+ * associated with the syntax parts of the SQL statement:
+ *
+ *  $options['selectoptions'] - string or array of SQL Select options 
+ *  $options['columns']       - string or array of column names and/or aliases 
+ *  $options['from']          - string or array of table names and/or aliases 
+ *  $options['where']         - string or array of where clauses, which will be
+ *                              ANDed together 
+ *  $options['groupby']       - string of group-by clauses
+ *  $options['orderby']       - string or array of ordering clauses
+ *  $options['limit']         - string of limit clause
+ *  $options['procedure']     - string of procedure call
+ *  $options['into']          - string of into clause
+ *  $options['other']         - string of trailing options
+ *  
+ **/
+function SelectFactory ($options)
+{
+  if ( ! is_array($options) ) return false;
+
+  // Select statement clause list, in order of appearance
+
+  $statement_clauses = array(); /* initialize to empty array */
+  $statement_clauses[0] = array('name' => 'selectoptions', 'join' => ' ');
+  $statement_clauses[1] = array('name' => 'columns', 'join' => ', ');
+  $statement_clauses[2] = array('name' => 'from', 'join' => ', ');
+  $statement_clauses[3] = array('name' => 'where', 'join' => ' AND ');
+  $statement_clauses[4] = array('name' => 'groupby', 'join' => ', ');
+  $statement_clauses[5] = array('name' => 'having', 'join' => ' AND ');
+  $statement_clauses[6] = array('name' => 'orderby', 'join' => ', ');
+  $statement_clauses[7] = array('name' => 'limit', 'join' => false);
+  $statement_clauses[8] = array('name' => 'procedure', 'join' => false);
+  $statement_clauses[9] = array('name' => 'into', 'join' => false);
+  $statement_clauses[10] = array('name' => 'other', 'join' => false);
+
+  $sql_statement = array();	/* initialize the statement array receiver */
+  $sql_statement[] = 'SELECT';
+
+  for ($i=0; $i < count($statement_clauses); $i++) {
+    if (array_key_exists($statement_clauses[$i])) {
+      if ($statement_clauses[$i]['join'] && is_array($options[$statement_clauses[$i]['name']])) {
+	$sql_statement[] = implode($statement_clauses[$i]['join'],$options[$statement_clauses[$i]['name']]);
+      } else {
+	$sql_statement[] = $options[$statement_clauses[$i]['name']];
+      }
+    }
+  }
+
+  // implode the crafted Select statement and return the string
+  return implode(' ',$sql_statement);
+
+} // END function SelectFactory

@@ -1,28 +1,28 @@
-<?php // -*- mode: php; time-stamp-start: "version [\"<]"; time-stamp-format: "%Y-%3b-%02d %02H:%02M"; -*- 
+<?php // -*- mode: php; time-stamp-start: "version [\"<]"; time-stamp-format: "%Y-%3b-%02d %02H:%02M"; -*-
 /**
  * General reusable functions
  *
  * @author Tamara Temple <tamara@tamaratemple.com>
- * @version <2012-Apr-13 23:10>
+ * @version <2012-Aug-24 11:01>
  * @copyright Tamara Temple Web Development,  2010-
  * @license GPLv3
  * @package common code
  *
  * License Info:
- * 
+ *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
  *  the Free Software Foundation, either version 3 of the License, or
  *  (at your option) any later version.
- * 
+ *
  *  This program is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  *  GNU General Public License for more details.
- * 
+ *
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
- * 
+ *
  *
  **/
 
@@ -50,7 +50,7 @@
  *   query -- query string to pass information to the remote
  *            application. (Optional.) Note, if query is an array
  *            instead of a string, it will be created using
- *            http_build_query() 
+ *            http_build_query()
  **/
 function build_url($parts)
 {
@@ -137,15 +137,15 @@ function emit_fatal_error($msg)
  * Validate the referer to this page
  *
  * @param string $match - regular expression to match to determine if
- *                        this is an okay referer string 
- * @return $referer 
+ *                        this is an okay referer string
+ * @return $referer
  * @author Tamara Temple <tamara@tamaratemple.com>
  **/
 function valid_referer($match)
 {
   if (!isset($_SERVER['HTTP_REFERER'])) return NULL;
   $referer = $_SERVER['HTTP_REFERER'];
-  
+
   // ensure regex delimiters are escaped in $match:
   $match = str_replace('!', '\!', $match);
 
@@ -269,7 +269,7 @@ function list_directories ($d='.')
   }
   sort($dirlist);
   return $dirlist;
-    
+
 } // END function list_directories
 
 
@@ -295,3 +295,30 @@ function list_files ($d='.')
   sort($filelist);
   return($filelist);
 } // END function list_files
+
+/**
+ * Return an HTML <select> statment based on an array of options
+ *
+ * @returns string HTML output for select statement
+ * @author Tamara Temple <tamara@tamaratemple.com>
+ * @param array $options_array - array of options (return value => option string),
+ * @param string $element_name - name and id of the select statement
+ * @param string $label=null - label to be used for select statement
+ * @param string $selected_item=null - key in $options_array to be preselected
+ **/
+function dynamic_select ($options_array,
+			 $element_name,
+			 $label=null,
+			 $selected_item=null)
+{
+  $out = PHP_EOL;
+  if (!empty($label)) $out .= "<label for \"$element_name\">$label</label>".PHP_EOL;
+  $out .= "<select name=\"$element_name\" id=\"$element_name\">".PHP_EOL;
+  foreach ($options_array as $key => $value) {
+    $out .= "  <option value=\"$key\"";
+    if ($key == $selected_item) $out .= " selected=\"selected\"";
+    $out .= ">$value</option>".PHP_EOL;
+  }
+  $out .= "</select>".PHP_EOL;
+  return $out;
+} // END function dynamic_select
